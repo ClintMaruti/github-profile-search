@@ -4,6 +4,8 @@ const nameContainer = document.querySelector("#name");
 const unContainer = document.querySelector("#user-name");
 const reposContainer = document.querySelector("#repos");
 const urlContainer = document.querySelector("#url");
+const bioContainer = document.querySelector("#bio");
+const locationContainer = document.querySelector("#location");
 
 const client_id = "Iv1.2693c7d25b24e93c";
 const client_secret = "d18a28b3c22dfb3c4c927857e9f18bcc4161504e";
@@ -14,23 +16,27 @@ const fetchUsers = async user => {
 
   const data = await api_call.json();
   return { data };
-
 };
 
 const showData = () => {
-    fetchUsers(inputValue.value)
-        .then((res) => {
+  fetchUsers(inputValue.value).then(res => {
+    
+    console.log(res)
 
-            nameContainer.innerHTML = `${res.data.name}`
+    nameContainer.innerHTML = `${res.data.name}`;
 
-            unContainer.innerHTML = `${res.data.login}`
-            
-            reposContainer.innerHTML = `${res.data.public_repos}`
+    unContainer.innerHTML = `${res.data.login}`;
 
-            urlContainer.innerHTML = `${res.data.html_url}`
-        })
-}
+    reposContainer.innerHTML = `${res.data.public_repos}`;
+
+    urlContainer.innerHTML = `${res.data.html_url}`;
+    
+    bioContainer.innerHTML = `${res.data.bio}`;
+
+    locationContainer.innerHTML = `${res.data.location}`;
+  });
+};
 
 searchButton.addEventListener("click", () => {
-  showData()
+  showData();
 });
